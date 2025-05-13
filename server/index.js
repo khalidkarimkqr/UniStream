@@ -10,6 +10,9 @@ const morgan = require("morgan")
 
 
 const app = express();
+const port = process.env.PORT || 8000
+
+dotenv.config()
 
 app.use(morgan("dev"))
 
@@ -17,3 +20,6 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
 
 }));
+
+app.use(express.json());
+
