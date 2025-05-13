@@ -11,7 +11,7 @@ const signup = async (req, res) => {
     if (user) {
       return res.status(400).json({
         success: false,
-        message: "User already exists",
+        message: "Please login",
         data: null,
       });
     }
@@ -44,4 +44,32 @@ const signup = async (req, res) => {
   }
 };
 
-module.exports = signup;
+
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Please signup",
+        data: null,
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid credentials",
+        data: null,
+      });
+    }
+
+    
+};
+
+
+
