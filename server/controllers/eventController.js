@@ -216,16 +216,15 @@ const endEvent = async (req, res) => {
 
 
 
+module.exports = {
+    createEvent,
+    registerUser,
+    getEvents,
+    getRegisteredEvents,
+    getEventById,
+    searchEvent,
+    startEvent,
+    endEvent,
+};
 
 
-
-
-
-
-
-module.exports = registerUser;
-
-
-
-
-module.exports = createEvent;
