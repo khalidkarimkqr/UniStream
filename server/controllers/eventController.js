@@ -122,6 +122,30 @@ const getRegisteredEvents = async (req, res) => {
 }
 }
 
+
+const getEventById = async (req, res) => {
+    const { eventId } = req.params;
+
+    try {
+        const eventData = await Event.findById(eventId).populate({ 
+            path: "registeredUsers",
+            select: "firstName lastName role",
+         });
+        if (!eventData) {
+            return res.status(404).json({success: false, message: "Event not found", data: null})
+        }
+
+        return res.status(200).json({success: true, message: "Event fetched successfully", data: eventData})
+    }
+    catch (error) {
+        return res.status(500).json({success: false, message: error.message, data: null})
+    }
+}
+
+
+
+
+
 module.exports = registerUser;
 
 
