@@ -40,6 +40,77 @@ const createEvent = async (req, res) => {
   }
 };
 
+
+
+const registerUser = async (req, res) => {
+  const userId = req.id;
+  const { eventId } = req.params;
+
+  try {
+    const event = await Event.findById(eventId);
+
+    if (!event) {
+      return res.status(404).json({
+        success: false,
+        message: "Event not found",
+        data: null,
+      });
+    }
+
+    const isUserRegistered = event.registeredUsers.some(
+      (registeredUserId) => registeredUserId.toString() === userId
+    );
+
+    if (isUserRegistered) {
+      return res.status(400).json({
+        success: false,
+        message: "User already registered for this event",
+        data: null,
+      });
+    }
+
+    event.registeredUsers.push(userId);
+    await event.save();
+
+    const user = await User.findById(userId);
+    user.registeredEvents.push(eventId);
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Registration successfully",
+      data: event,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+      data: null,
+    });
+  }
+};
+
+
+const getEvents = async (req, res) => {
+    try {
+        const events = await Event.find().populate({
+            path: "registeredUsers",
+            select: "firstName lastName",
+        }).sort({createdAt: -1})
+
+        return res.status(200).json({success: true, message: "Events fetched successfully", data: events})
+
+    } catch (error) {
+        return res.status(500).json({success: false, message: error.message, data: null})
+    }
+}
+
+
+module.exports = registerUser;
+
+
+
+
 module.exports = createEvent;
 
 
