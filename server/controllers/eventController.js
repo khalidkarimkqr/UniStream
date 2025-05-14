@@ -142,6 +142,25 @@ const getEventById = async (req, res) => {
     }
 }
 
+const searchEvent = async (req, res) => {
+    const { search } = req.query;
+
+    try {
+        const events = await Event.find({
+            $or: [
+                { title: { $regex: new RegExp(search, "i")} },
+                { description: { $regex: new RegExp(search, "i") } },
+            ],
+        });
+        return res.status(200).json({success: true, message: "Events fetched successfully", data: events})
+    }
+    catch (error) {
+        return res.status(500).json({success: false, message: error.message, data: null})
+    }
+}
+
+
+
 
 
 
