@@ -187,6 +187,34 @@ const startEvent = async (req, res) => {
     }
 };
 
+const endEvent = async (req, res) => {
+    if (req.role !== ROLES.admin) {
+        return res.status(403).json({
+            success: false,
+            message: "You are not allowed to end an event",
+            data: null,
+        });
+    }
+
+    const { eventId } = req.params;
+    try {
+        await Event.findByIdAndUpdate(eventId, { status: "ended" });
+        return res.status(200).json({
+            success: true,
+            message: "Event ended successfully",
+            data: null,
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+            data: null,
+        });
+    }
+};
+
+
 
 
 
