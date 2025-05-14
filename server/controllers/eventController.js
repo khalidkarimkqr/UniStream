@@ -106,11 +106,25 @@ const getEvents = async (req, res) => {
 }
 
 
+const getRegisteredEvents = async (req, res) => {
+    const userId = req.id;
+
+    try {
+        const events = await User.findById(userId).populate("registeredEvents").sort({createdAt: -1});
+        if (events.registeredEvents.length <= 0) {
+            return res.status(404).json({success: false, message: "No events found", data: null})
+        }
+
+        return res.status(200).json({success: true, message: "Events fetched successfully", data: events.registeredEvents})
+    }
+    catch (error) {
+        return res.status(500).json({success: false, message: error.message, data: null})
+}
+}
+
 module.exports = registerUser;
 
 
 
 
 module.exports = createEvent;
-
-
