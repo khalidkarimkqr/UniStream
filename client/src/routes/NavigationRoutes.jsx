@@ -5,6 +5,9 @@ import Dashboard from "../pages/Dashboard";
 import Layout from "../layouts/Layout";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Event from "../pages/Event";
+import Room from "../pages/Room";
+import Error from "../pages/Error";
 
 const NavigationRoutes = () => {
   return (
@@ -42,6 +45,23 @@ const NavigationRoutes = () => {
             </Layout>
           }
         />
+        <Route
+          path="/event/:eventId"
+          element={
+            <Layout>
+              <Event />
+            </Layout>
+          }
+        />
+        <Route
+          path="/room/:roomId"
+          element={
+            <Layout>
+              <Room />
+            </Layout>
+          }
+        />
+        <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
