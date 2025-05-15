@@ -1,10 +1,11 @@
 import React from "react";
+import NavigationRoutes from "./routes/NavigationRoutes";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <>
+      <NavigationRoutes />
+    </>
   );
 }
 
