@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import Input from "./ui/Input";
@@ -21,6 +20,7 @@ const SearchBar = () => {
           .catch((err) => console.log(err));
       }
     }, 300);
+    return () => clearTimeout(debounceTimer);
   }, [searchTerm]);
 
   const handleSearch = (e) => {
