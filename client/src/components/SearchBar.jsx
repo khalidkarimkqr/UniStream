@@ -12,6 +12,7 @@ const SearchBar = () => {
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       if (searchTerm) {
+        console.log("Searching for:", searchTerm);
         axios
           .get(
             `${import.meta.env.VITE_API_URL}/search-event?search=${searchTerm}`
