@@ -1,11 +1,12 @@
 import React from "react";
 
 import { Toaster } from "react-hot-toast";
+import Navbar from "../components/Navbar";
 
 const Layout = ({ children }) => {
   return (
     <>
-      <span>Navbar</span>
+      <Navbar />
       <Toaster
         position="bottom-center"
         reverseOrder={false}
