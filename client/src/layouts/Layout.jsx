@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 const Layout = ({ children }) => {
   return (
     <>
+      <span>Navbar</span>
       <Toaster
         position="bottom-center"
         reverseOrder={false}
