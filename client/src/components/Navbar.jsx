@@ -14,6 +14,7 @@ const Navbar = () => {
     localStorage.removeItem("user");
     setUser(null);
     setIsAuthenticated(false);
+    navigate("/");
   };
 
   return (
