@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext } from "react";
 import { AppContext } from "../contexts/AppContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -30,7 +29,7 @@ const Navbar = () => {
           >
             Dashboard
           </Link>
-          <Button text="Logout" />
+          <Button text="Logout" onClick={handleLogout} />
         </ul>
       ) : (
         <ul className="flex gap-3">

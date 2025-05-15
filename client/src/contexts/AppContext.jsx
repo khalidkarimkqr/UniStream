@@ -5,7 +5,7 @@ export const AppContext = createContext(null);
 
 export const AppProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("user") || true
+    !!localStorage.getItem("user")
   );
 
   const [user, setUser] = useState(
