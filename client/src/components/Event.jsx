@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../components/ui/Button";
 
 const Event = ({
   _id,
@@ -20,6 +21,19 @@ const Event = ({
       >
         {title}
       </Link>
+      <p class="text-sm sm:text-md text-gray-500">
+        {description.length > 100
+          ? description.slice(0, 100) + "..."
+          : description}
+      </p>
+      <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-1">
+          <h3 className="text-xs sm:text:sm text-slate-500 flex gap-2">
+            On: {date} At: {time}
+          </h3>
+        </div>
+        <Button />
+      </div>
     </div>
   );
 };
