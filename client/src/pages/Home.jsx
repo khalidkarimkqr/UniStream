@@ -4,9 +4,34 @@ import SearchBar from "../components/SearchBar";
 import Event from "../components/Event";
 import { AppContext } from "../contexts/AppContext";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Home = () => {
   const { events, setEvents } = useContext(AppContext);
+
+  const registerEvent = async (eventId) => {
+    try {
+      const res = await axios.put(
+        `${import.meta.env.VITE_API_URL}/register-user/${eventId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      const data = await res.data;
+
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   useEffect(() => {
     const getEvents = async () => {
