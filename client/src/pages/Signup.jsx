@@ -8,9 +8,18 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      // signup logic goes here
+      const formData = new FormData(e.target);
+
+      const payload = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+      };
+
+      // you can now send payload to your API
     } catch (error) {
-      // handle errors
+      toast.error(error.response.data.message);
     }
   };
 
