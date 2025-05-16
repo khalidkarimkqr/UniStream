@@ -12,8 +12,14 @@ const Event = ({
   onClick,
 }) => {
   return (
-    <div>
-      <Link to={`/event/${_id}`}>{title}</Link>
+    <div className="p-3 rounded-lg bg-gray-50 shadow-md flex flex-col gap-1 hover:scale-105 transition-all ease-in-out duration-300 cursor-pointer">
+      <Link
+        to={`/event/${_id}`}
+        className="text-md sm:text-lg font-semibold text-gray-700 hover:underline"
+        title="View Event Details"
+      >
+        {title}
+      </Link>
     </div>
   );
 };
