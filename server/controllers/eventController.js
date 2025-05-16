@@ -96,13 +96,11 @@ const getEvents = async (req, res) => {
       })
       .sort({ createdAt: -1 });
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Events fetched successfully",
-        data: events,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Events fetched successfully",
+      data: events,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -123,13 +121,11 @@ const getRegisteredEvents = async (req, res) => {
         .json({ success: false, message: "No events found", data: null });
     }
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Events fetched successfully",
-        data: events.registeredEvents,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Events fetched successfully",
+      data: events.registeredEvents,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -151,13 +147,11 @@ const getEventById = async (req, res) => {
         .json({ success: false, message: "Event not found", data: null });
     }
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Event fetched successfully",
-        data: eventData,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Event fetched successfully",
+      data: eventData,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -175,13 +169,11 @@ const searchEvent = async (req, res) => {
         { description: { $regex: new RegExp(search, "i") } },
       ],
     });
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Events fetched successfully",
-        data: events,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Events fetched successfully",
+      data: events,
+    });
   } catch (error) {
     return res
       .status(500)
