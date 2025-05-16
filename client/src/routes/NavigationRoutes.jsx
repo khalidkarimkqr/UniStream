@@ -8,6 +8,7 @@ import Signup from "../pages/Signup";
 import Event from "../pages/Event";
 import Room from "../pages/Room";
 import Error from "../pages/Error";
+import ProtectedRoute from "./ProtectedRoute";
 
 const NavigationRoutes = () => {
   return (
@@ -25,7 +26,9 @@ const NavigationRoutes = () => {
           path="/dashboard"
           element={
             <Layout>
-              <Dashboard />
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
             </Layout>
           }
         />
@@ -33,7 +36,9 @@ const NavigationRoutes = () => {
           path="/login"
           element={
             <Layout>
-              <Login />
+              <ProtectedRoute>
+                <Login />
+              </ProtectedRoute>
             </Layout>
           }
         />
@@ -41,7 +46,9 @@ const NavigationRoutes = () => {
           path="/signup"
           element={
             <Layout>
-              <Signup />
+              <ProtectedRoute>
+                <Signup />
+              </ProtectedRoute>
             </Layout>
           }
         />
@@ -49,7 +56,9 @@ const NavigationRoutes = () => {
           path="/event/:eventId"
           element={
             <Layout>
-              <Event />
+              <ProtectedRoute>
+                <Event />
+              </ProtectedRoute>
             </Layout>
           }
         />
@@ -57,7 +66,9 @@ const NavigationRoutes = () => {
           path="/room/:roomId"
           element={
             <Layout>
-              <Room />
+              <ProtectedRoute>
+                <Room />
+              </ProtectedRoute>
             </Layout>
           }
         />
