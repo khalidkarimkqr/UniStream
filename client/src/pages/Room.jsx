@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../contexts/AppContext";
+import {} from "@zegocloud/zego-uikit-prebuilt";
 
 const Room = () => {
   const { roomId } = useParams();
@@ -10,6 +11,10 @@ const Room = () => {
   const joinRoom = (element) => {
     const appId = Number(import.meta.env.VITE_ZEGOCLOUD_APP_ID);
     const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET;
+
+    const userId = user._id;
+    const userName = user.firstname + " " + user.lastname;
+    let role = user.role === "admin" ? 1 : 2;
   };
 
   return <div>Room</div>;
