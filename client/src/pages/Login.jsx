@@ -28,6 +28,7 @@ const Login = () => {
       if (data.success) {
         toast.success(data.message);
         e.target.reset();
+        localStorage.setItem("token", data.data.token);
         setIsAuthenticated(true);
       } else {
         toast.error(data.message);
