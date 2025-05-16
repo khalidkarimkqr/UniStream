@@ -12,9 +12,14 @@ const Dashboard = () => {
   const { user } = useContext(AppContext);
 
   const registerEvent = async (e) => {
-    e.preventDeault();
+    e.preventDefault();
     try {
-      const formData = new FormData(e);
+      const formData = new FormData(e.target);
+
+      const rawData = formData.get("date");
+      const rawTime = formData.get("time");
+
+      console.log(rawData, rawTime);
     } catch (error) {
       toast.error(error.response.data.message);
     }
