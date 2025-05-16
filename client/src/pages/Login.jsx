@@ -7,10 +7,10 @@ import toast from "react-hot-toast";
 const Login = () => {
   return (
     <div>
-      <form>
+      <form className="sm:w-[50vw] mx-auto px-5 h-[80vh] flex flex-col justify-center gap-4">
         <Input id="email" type="email" placeholder="Email Here" />
         <Input id="password" type="password" placeholder="Password Here" />
-        <Button text="login" />
+        <Button text="Login" />
       </form>
     </div>
   );
