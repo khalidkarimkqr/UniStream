@@ -1,12 +1,23 @@
 import React from "react";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
+import { toast } from "react-hot-toast";
 
 const Signup = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // signup logic goes here
+    } catch (error) {
+      // handle errors
+    }
+  };
+
   return (
     <div>
       <form
-        action=""
+        onSubmit={handleSubmit}
         className="sm:w-[50vw] mx-auto px-5 h-[80vh] flex flex-col justify-center gap-4"
       >
         <div className="flex gap-4">
