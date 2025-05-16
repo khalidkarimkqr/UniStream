@@ -1,10 +1,17 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../contexts/AppContext";
 
 const Room = () => {
   const { roomId } = useParams();
   const { user } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const joinRoom = (element) => {
+    const appId = Number(import.meta.env.VITE_ZEGOCLOUD_APP_ID);
+    const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET;
+  };
+
   return <div>Room</div>;
 };
 
