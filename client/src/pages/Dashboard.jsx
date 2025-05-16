@@ -20,6 +20,20 @@ const Dashboard = () => {
       const rawTime = formData.get("time");
 
       console.log(rawData, rawTime);
+
+      const formattedDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date(rawData));
+
+      const [hours, minutes] = rawTime.split(":");
+
+      const formattedTime = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }).format(new Date(0, 0, 0, hours, minutes));
     } catch (error) {
       toast.error(error.response.data.message);
     }
