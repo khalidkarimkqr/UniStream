@@ -14,11 +14,12 @@ const Event = ({
   status = "upcoming",
   onClick,
 }) => {
-  const { pathName } = useLocation;
+  const { pathname } = useLocation();
   const { user } = useContext(AppContext);
 
   const checkEventStatus = () => {
-    if (pathName === "/dashboard") {
+    console.log(pathname);
+    if (pathname === "/dashboard") {
       if (user?.role === "admin") {
         return status === "not started" ? "Start Now" : status;
       }

@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Event from "../Event";
+import toast from "react-hot-toast";
 
 const RegisteredEventList = () => {
   const [events, setEvents] = useState([]);
@@ -29,7 +29,38 @@ const RegisteredEventList = () => {
     getRegisteredEvents();
   }, []);
 
-  const startEvent = async (eventId, eventstatus) => {};
+  const startEvent = async (eventId, eventstatus) => {
+    setLoading(true);
+    if (user.role !== "admin") {
+      if (eventstatus === "started") {
+        setLoading(false);
+        navigate(`/room/${eventId}`);
+        return;
+      } else {
+        if (eventstatus === "not started") {
+          const res = await axios.put(
+            import.meta.env.VITE_API_URL + `/start-event/${eventId}`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+          const { data } = await res.data;
+          if (data.success) {
+            setLoading(false);
+            navigate(`/room/${eventId}`);
+            toast.success(data.message);
+          } else {
+            setLoading(false);
+            toast.error(data.message);
+          }
+        }
+      }
+    }
+    setLoading(false);
+  };
 
   return (
     <>
