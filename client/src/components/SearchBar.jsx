@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Input from "./ui/Input";
 import axios from "axios";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../contexts/AppContext";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
