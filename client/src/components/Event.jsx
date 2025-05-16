@@ -49,6 +49,11 @@ const Event = ({
           <h3 className="text-xs sm:text:sm text-slate-500 flex gap-2">
             On: {date} At: {time}
           </h3>
+          <div className="text-xs sm:text-sm text-slate-500 flex gap-2">
+            <FiUsers className="text-sm sm:text-lg" />
+            <span>{registeredUsers?.length} Registered Users</span>
+          </div>
+          <Button text={checkEventStatus()} onClick={onClick} />
         </div>
         <Button />
       </div>
