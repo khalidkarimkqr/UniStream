@@ -1,6 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { FiUsers } from "react-icons/fi";
+import { AppContext } from "../contexts/AppContext";
 
 const Event = ({
   _id,
@@ -12,6 +14,22 @@ const Event = ({
   status = "upcoming",
   onClick,
 }) => {
+  const { pathName } = useLocation;
+  const { user } = useContext(AppContext);
+
+  const checkEventStatus = () => {
+    if (pathName === "/dashboard") {
+      if (user?.role === "admin") {
+        return status === "not started" ? "Start Now" : status;
+      }
+      if (user?.role === "user") {
+        return status === "not started" ? "Upcoming" : status;
+      }
+    } else {
+      return status === "not started" ? "Register" : status;
+    }
+  };
+
   return (
     <div className="p-3 rounded-lg bg-gray-50 shadow-md flex flex-col gap-1 hover:scale-105 transition-all ease-in-out duration-300 cursor-pointer">
       <Link
