@@ -34,6 +34,23 @@ const Dashboard = () => {
         minute: "numeric",
         hour12: true,
       }).format(new Date(0, 0, 0, hours, minutes));
+
+      const payLoad = {
+        title: formData.get("title"),
+        description,
+        date: formattedDate,
+        time: formattedTime,
+      };
+
+      const res = await axios.post(
+        import.meta.env.VITE_API_URL + "/create-event",
+        payLoad,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
     } catch (error) {
       toast.error(error.response.data.message);
     }
