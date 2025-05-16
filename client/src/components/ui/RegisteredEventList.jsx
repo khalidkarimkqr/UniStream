@@ -29,13 +29,7 @@ const RegisteredEventList = () => {
     getRegisteredEvents();
   }, []);
 
-
-
-const startEvent = async (eventId, status) => {
-
-
-
-
+  const startEvent = async (eventId, eventstatus) => {};
 
   return (
     <>
@@ -54,7 +48,11 @@ const startEvent = async (eventId, status) => {
           )}
           <div className="w-full sm:w-[50vw] mx-auto px-5 grid-cols-1 sm:grid-cols-2 gap-4 my-10">
             {events.map((event) => (
-              <Event key={event?._id} {...event} onClick={() => startEvent(event._id, event.status)}/>
+              <Event
+                key={event?._id}
+                {...event}
+                onClick={() => startEvent(event._id, event.status)}
+              />
             ))}
           </div>
         </div>
