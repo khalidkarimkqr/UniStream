@@ -39,7 +39,7 @@ const Event = ({
       >
         {title}
       </Link>
-      <p class="text-sm sm:text-md text-gray-500">
+      <p className="text-sm sm:text-md text-gray-500">
         {description.length > 100
           ? description.slice(0, 100) + "..."
           : description}
