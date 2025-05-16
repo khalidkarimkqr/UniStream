@@ -2,8 +2,12 @@ import React from "react";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { toast } from "react-hot-toast";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,7 +21,20 @@ const Signup = () => {
         password: formData.get("password"),
       };
 
-      // you can now send payload to your API
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/signup`,
+        payload
+      );
+
+      const data = await res.data;
+
+      if (data.success) {
+        toast.success(data.message);
+        e.target.reset();
+        navigate("/login");
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
       toast.error(error.response.data.message);
     }
