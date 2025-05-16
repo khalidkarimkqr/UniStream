@@ -58,6 +58,12 @@ const RegisteredEventList = () => {
           }
         }
       }
+
+      if (eventstatus === "ended") {
+        setLoading(false);
+        toast.error("Event has already ended");
+        return;
+      }
     }
     setLoading(false);
   };
