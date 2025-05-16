@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "../components/ui/Input";
+import Button from "../components/ui/Button";
 
 const Signup = () => {
   return (
@@ -13,6 +14,10 @@ const Signup = () => {
           <Input id="lastName" type="text" placeholder="Last Name Here" />
         </div>
         <Input id="email" type="email" placeholder="Email Here" />
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Input id="password" type="password" placeholder="Password Here" />
+          <Button text="Create Account" />
+        </div>
       </form>
     </div>
   );
