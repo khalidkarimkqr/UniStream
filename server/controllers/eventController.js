@@ -1,9 +1,8 @@
 const Event = require("../models/Event");
 
-const ROLES = require("..lib/roles");
+const ROLES = require("../lib/roles");
 
 const User = require("../models/User");
-
 
 const createEvent = async (req, res) => {
   if (req.role !== ROLES.admin) {
@@ -39,8 +38,6 @@ const createEvent = async (req, res) => {
     });
   }
 };
-
-
 
 const registerUser = async (req, res) => {
   const userId = req.id;
@@ -90,141 +87,167 @@ const registerUser = async (req, res) => {
   }
 };
 
-
 const getEvents = async (req, res) => {
-    try {
-        const events = await Event.find().populate({
-            path: "registeredUsers",
-            select: "firstName lastName",
-        }).sort({createdAt: -1})
+  try {
+    const events = await Event.find()
+      .populate({
+        path: "registeredUsers",
+        select: "firstName lastName",
+      })
+      .sort({ createdAt: -1 });
 
-        return res.status(200).json({success: true, message: "Events fetched successfully", data: events})
-
-    } catch (error) {
-        return res.status(500).json({success: false, message: error.message, data: null})
-    }
-}
-
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Events fetched successfully",
+        data: events,
+      });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: error.message, data: null });
+  }
+};
 
 const getRegisteredEvents = async (req, res) => {
-    const userId = req.id;
+  const userId = req.id;
 
-    try {
-        const events = await User.findById(userId).populate("registeredEvents").sort({createdAt: -1});
-        if (events.registeredEvents.length <= 0) {
-            return res.status(404).json({success: false, message: "No events found", data: null})
-        }
-
-        return res.status(200).json({success: true, message: "Events fetched successfully", data: events.registeredEvents})
+  try {
+    const events = await User.findById(userId)
+      .populate("registeredEvents")
+      .sort({ createdAt: -1 });
+    if (events.registeredEvents.length <= 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No events found", data: null });
     }
-    catch (error) {
-        return res.status(500).json({success: false, message: error.message, data: null})
-}
-}
 
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Events fetched successfully",
+        data: events.registeredEvents,
+      });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: error.message, data: null });
+  }
+};
 
 const getEventById = async (req, res) => {
-    const { eventId } = req.params;
+  const { eventId } = req.params;
 
-    try {
-        const eventData = await Event.findById(eventId).populate({ 
-            path: "registeredUsers",
-            select: "firstName lastName role",
-         });
-        if (!eventData) {
-            return res.status(404).json({success: false, message: "Event not found", data: null})
-        }
+  try {
+    const eventData = await Event.findById(eventId).populate({
+      path: "registeredUsers",
+      select: "firstName lastName role",
+    });
+    if (!eventData) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Event not found", data: null });
+    }
 
-        return res.status(200).json({success: true, message: "Event fetched successfully", data: eventData})
-    }
-    catch (error) {
-        return res.status(500).json({success: false, message: error.message, data: null})
-    }
-}
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Event fetched successfully",
+        data: eventData,
+      });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: error.message, data: null });
+  }
+};
 
 const searchEvent = async (req, res) => {
-    const { search } = req.query;
+  const { search } = req.query;
 
-    try {
-        const events = await Event.find({
-            $or: [
-                { title: { $regex: new RegExp(search, "i")} },
-                { description: { $regex: new RegExp(search, "i") } },
-            ],
-        });
-        return res.status(200).json({success: true, message: "Events fetched successfully", data: events})
-    }
-    catch (error) {
-        return res.status(500).json({success: false, message: error.message, data: null})
-    }
-}
-
+  try {
+    const events = await Event.find({
+      $or: [
+        { title: { $regex: new RegExp(search, "i") } },
+        { description: { $regex: new RegExp(search, "i") } },
+      ],
+    });
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Events fetched successfully",
+        data: events,
+      });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: error.message, data: null });
+  }
+};
 
 const startEvent = async (req, res) => {
-    if (req.role !== ROLES.admin) {
-        return res.status(403).json({
-            success: false,
-            message: "You are not allowed to start an event",
-            data: null,
-        });
-    }
+  if (req.role !== ROLES.admin) {
+    return res.status(403).json({
+      success: false,
+      message: "You are not allowed to start an event",
+      data: null,
+    });
+  }
 
-    const { eventId } = req.params;
-    try {
-        await Event.findByIdAndUpdate(eventId, { status: "started" });
-        return res.status(200).json({
-            success: true,
-            message: "Event started successfully",
-            data: null,
-        });
-    }
-    catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message,
-            data: null,
-        });
-    }
+  const { eventId } = req.params;
+  try {
+    await Event.findByIdAndUpdate(eventId, { status: "started" });
+    return res.status(200).json({
+      success: true,
+      message: "Event started successfully",
+      data: null,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+      data: null,
+    });
+  }
 };
 
 const endEvent = async (req, res) => {
-    if (req.role !== ROLES.admin) {
-        return res.status(403).json({
-            success: false,
-            message: "You are not allowed to end an event",
-            data: null,
-        });
-    }
+  if (req.role !== ROLES.admin) {
+    return res.status(403).json({
+      success: false,
+      message: "You are not allowed to end an event",
+      data: null,
+    });
+  }
 
-    const { eventId } = req.params;
-    try {
-        await Event.findByIdAndUpdate(eventId, { status: "ended" });
-        return res.status(200).json({
-            success: true,
-            message: "Event ended successfully",
-            data: null,
-        });
-    }
-    catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message,
-            data: null,
-        });
-    }
+  const { eventId } = req.params;
+  try {
+    await Event.findByIdAndUpdate(eventId, { status: "ended" });
+    return res.status(200).json({
+      success: true,
+      message: "Event ended successfully",
+      data: null,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+      data: null,
+    });
+  }
 };
-
-
 
 module.exports = {
-    createEvent,
-    registerUser,
-    getEvents,
-    getRegisteredEvents,
-    getEventById,
-    searchEvent,
-    startEvent,
-    endEvent,
+  createEvent,
+  registerUser,
+  getEvents,
+  getRegisteredEvents,
+  getEventById,
+  searchEvent,
+  startEvent,
+  endEvent,
 };
-
-
