@@ -1,11 +1,15 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import { React, useContext } from "react";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { AppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { setIsAuthenticated } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,8 +32,10 @@ const Login = () => {
       if (data.success) {
         toast.success(data.message);
         e.target.reset();
+        localStorage.setItem("user", JSON.stringify(data.data.user));
         localStorage.setItem("token", data.data.token);
         setIsAuthenticated(true);
+        navigate("/dashboard");
       } else {
         toast.error(data.message);
       }
