@@ -53,9 +53,8 @@ const Event = ({
             <FiUsers className="text-sm sm:text-lg" />
             <span>{registeredUsers?.length} Registered Users</span>
           </div>
-          <Button text={checkEventStatus()} onClick={onClick} />
         </div>
-        <Button />
+        <Button text={checkEventStatus()} onClick={onClick} />
       </div>
     </div>
   );
