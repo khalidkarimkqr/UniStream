@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-empty */
 import React, { useContext, useState } from "react";
 import { AppContext } from "../contexts/AppContext";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import RegisteredEventList from "../components/ui/RegisteredEventList";
 
 const Dashboard = () => {
   const [description, setDescription] = useState("");
@@ -51,6 +50,16 @@ const Dashboard = () => {
           },
         }
       );
+
+      const data = await res.data;
+
+      if (data.success) {
+        toast.success(data.message);
+        e.target.reset();
+        setDescription("");
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -76,6 +85,7 @@ const Dashboard = () => {
           <Button text="Create Event" />
         </form>
       )}
+      <RegisteredEventList />
     </div>
   );
 };
