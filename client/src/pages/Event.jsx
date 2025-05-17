@@ -30,7 +30,16 @@ const Event = () => {
     <div className="w-full sm:w-[50vw] mx-auto px-5 my-10">
       {event && (
         <div>
-          <div></div>
+          <div className="p-4 bg-gray-100 rounded-lg grid gap-1">
+            <h1 className="text-2xl font-semibold text-gray-700">
+              {event.title}
+            </h1>
+            <p className="text-gray-500 bg-white p-3 rounded-2xl my-2">
+              {event.description}
+            </p>
+            <p className="text-yellow-500 font-semibold">Date: {event.date}</p>
+            <p className="text-yellow-500 font-semibold">Time: {event.time}</p>
+          </div>
           <div></div>
         </div>
       )}
