@@ -33,7 +33,7 @@ const Room = () => {
   };
 
   const joinRoom = (element) => {
-    const appId = Number(import.meta.env.VITE_ZEGOCLOUD_APP_ID);
+    const appID = Number(import.meta.env.VITE_ZEGOCLOUD_API_ID);
     const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET;
 
     const userId = user._id;
@@ -43,7 +43,7 @@ const Room = () => {
         ? ZegoUIKitPrebuilt.Host
         : ZegoUIKitPrebuilt.Audience;
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
-      appId,
+      appID,
       serverSecret,
       roomId,
       userId,
@@ -62,7 +62,7 @@ const Room = () => {
       },
       liveNotStartedTextForAudience:
         "Event not started yet, please wait for the host to start the event",
-      onLeaveRoom: (userList) => {
+      onLeaveRoom: () => {
         if (user.role === "admin") {
           endLive();
           return;
@@ -73,7 +73,7 @@ const Room = () => {
     });
   };
 
-  return <div>Room</div>;
+  return <div ref={joinRoom} className="w-full h-[80vh]"></div>;
 };
 
 export default Room;

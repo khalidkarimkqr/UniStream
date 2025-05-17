@@ -7,7 +7,7 @@ import { AppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { setIsAuthenticated } = useContext(AppContext);
+  const { setUser, setIsAuthenticated } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -31,7 +31,8 @@ const Login = () => {
       if (data.success) {
         toast.success(data.message);
         e.target.reset();
-        localStorage.setItem("user", JSON.stringify(data.data.user));
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        setUser(res.data.user);
         localStorage.setItem("token", data.data.token);
         setIsAuthenticated(true);
         navigate("/dashboard");

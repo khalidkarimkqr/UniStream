@@ -31,7 +31,7 @@ const RegisteredEventList = () => {
 
   const startEvent = async (eventId, eventstatus) => {
     setLoading(true);
-    if (user.role !== "admin") {
+    if (user.role === "admin") {
       if (eventstatus === "started") {
         setLoading(false);
         navigate(`/room/${eventId}`);
@@ -47,7 +47,8 @@ const RegisteredEventList = () => {
               },
             }
           );
-          const { data } = await res.data;
+          const data = await res.data;
+
           if (data.success) {
             setLoading(false);
             navigate(`/room/${eventId}`);
