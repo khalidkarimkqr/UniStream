@@ -26,7 +26,27 @@ const Room = () => {
       userName
     );
 
-    const zc = ZegoUIKitPrebuilt.create(kitToken);
+    const zp = ZegoUIKitPrebuilt.create(kitToken);
+
+    zp.joinRoom({
+      container: element,
+      scenario: {
+        mode: ZegoUIKitPrebuilt.LiveStreaming,
+        config: {
+          role,
+        },
+      },
+      liveNotStartedTextForAudience:
+        "Event not started yet, please wait for the host to start the event",
+      onLeaveRoom: (userList) => {
+        if (user.role === "admin") {
+          endLive();
+          return;
+        } else {
+          navigate("/dashboard");
+        }
+      },
+    });
   };
 
   return <div>Room</div>;
