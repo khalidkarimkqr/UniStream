@@ -37,7 +37,7 @@ const Room = () => {
     const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET;
 
     const userId = user._id;
-    const userName = user.firstname + " " + user.lastname;
+    const userName = user.firstName + " " + user.lastName;
     let role =
       user.role === "admin"
         ? ZegoUIKitPrebuilt.Host

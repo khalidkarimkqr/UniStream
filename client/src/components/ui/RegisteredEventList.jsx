@@ -84,7 +84,7 @@ const RegisteredEventList = () => {
               </h1>
             </div>
           )}
-          <div className="w-full sm:w-[50vw] mx-auto px-5 grid-cols-1 sm:grid-cols-2 gap-4 my-10">
+          <div className="w-full sm:w-[50vw] mx-auto px-5 grid grid-cols-1 sm:grid-cols-2 gap-4 my-10">
             {events.map((event) => (
               <Event
                 key={event?._id}
