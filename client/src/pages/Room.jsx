@@ -33,7 +33,7 @@ const Room = () => {
   };
 
   const joinRoom = (element) => {
-    const appID = Number(import.meta.env.VITE_ZEGOCLOUD_API_ID);
+    const appID = Number(import.meta.env.VITE_ZEGOCLOUD_APP_ID);
     const serverSecret = import.meta.env.VITE_ZEGOCLOUD_SERVER_SECRET;
 
     const userId = user._id;
