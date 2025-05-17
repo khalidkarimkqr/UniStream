@@ -1,12 +1,13 @@
 <div align="center">
 
-# 🎥 UniStream — Campus Event Streaming Platform 🎥
+# 🎥 UniStream — Campus Goes Live 🎥
 
-### A powerful, real-time campus live-streaming platform built with the MERN stack & ZegoCloud
+## Live campus event platform built with real-time streaming tech and the MERN stack.
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://your-deployed-demo.vercel.app)
 
 ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
 ![](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 ![](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
@@ -28,13 +29,13 @@
 
 ---
 
-## 💡 About
+## About
 
-**UniStream** is a live-streaming MERN app designed to simplify event hosting for universities and organizations. Admins can create, start, and end events in real time. Students can join streams instantly. It’s Zoom meets event calendar — all in your browser.
+**UniStream** is a live-streaming MERN app designed to simplify event hosting for universities and organizations. Admins can create, start, and end events in real time. Students can join streams instantly.It’s seamless live events and scheduling — all in your browser.
 
 ---
 
-## ✨ Features
+## Features
 
 - 🎥 Real-time live streaming via ZegoCloud
 - 🧑‍💻 Role-based UI for **admins** and **users**
