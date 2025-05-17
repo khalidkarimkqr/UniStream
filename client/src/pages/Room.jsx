@@ -18,6 +18,15 @@ const Room = () => {
       user.role === "admin"
         ? ZegoUIKitPrebuilt.Host
         : ZegoUIKitPrebuilt.Audience;
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+      appId,
+      serverSecret,
+      roomId,
+      userId,
+      userName
+    );
+
+    const zc = ZegoUIKitPrebuilt.create(kitToken);
   };
 
   return <div>Room</div>;
