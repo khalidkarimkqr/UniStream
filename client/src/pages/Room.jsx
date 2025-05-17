@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../contexts/AppContext";
-import {} from "@zegocloud/zego-uikit-prebuilt";
+import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 
 const Room = () => {
   const { roomId } = useParams();
@@ -14,7 +14,10 @@ const Room = () => {
 
     const userId = user._id;
     const userName = user.firstname + " " + user.lastname;
-    let role = user.role === "admin" ? 1 : 2;
+    let role =
+      user.role === "admin"
+        ? ZegoUIKitPrebuilt.Host
+        : ZegoUIKitPrebuilt.Audience;
   };
 
   return <div>Room</div>;
