@@ -11,16 +11,8 @@ const SearchBar = () => {
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      if (searchTerm) {
-        // fetch filtered events
-        axios
-          .get(
-            `${import.meta.env.VITE_API_URL}/search-event?search=${searchTerm}`
-          )
-          .then((res) => setEvents(res.data.data))
-          .catch((err) => console.log(err));
-      } else {
-        // if input is cleared, fetch all events again
+      if (searchTerm.trim() === "") {
+        // If input is cleared, refetch all events
         axios
           .get(`${import.meta.env.VITE_API_URL}/get-registered-events`, {
             headers: {
@@ -29,8 +21,22 @@ const SearchBar = () => {
           })
           .then((res) => setEvents(res.data.data))
           .catch((err) => console.log(err));
+      } else {
+        // If input has value, search
+        axios
+          .get(
+            `${import.meta.env.VITE_API_URL}/search-event?search=${searchTerm}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          )
+          .then((res) => setEvents(res.data.data))
+          .catch((err) => console.log(err));
       }
     }, 300);
+
     return () => clearTimeout(debounceTimer);
   }, [searchTerm]);
 
