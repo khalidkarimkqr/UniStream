@@ -53,18 +53,20 @@ const Signup = () => {
           <Input id="lastName" type="text" placeholder="Last Name Here" />
         </div>
         <Input id="email" type="email" placeholder="Email Here" />
-        <div className="flex flex-col sm:flex-row gap-4 items-center relative">
-          <Input
-            id="password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Password Here"
-          />
-          <span
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-4 top-[30%] cursor-pointer text-xl"
-          >
-            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-          </span>
+        <div className="flex flex-col gap-4">
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password Here"
+            />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-3 cursor-pointer text-xl"
+            >
+              {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </span>
+          </div>
           <Button text="Create Account" />
         </div>
       </form>
