@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
@@ -31,13 +32,20 @@ const RegisteredEventList = () => {
 
   const startEvent = async (eventId, eventstatus) => {
     setLoading(true);
+
+    if (eventstatus === "ended") {
+      setLoading(false);
+      toast.error("Event has already ended");
+      return;
+    }
+
     if (user.role === "admin") {
       if (eventstatus === "started") {
         setLoading(false);
         navigate(`/room/${eventId}`);
         return;
-      } else {
-        if (eventstatus === "not started") {
+      } else if (eventstatus === "not started") {
+        try {
           const res = await axios.put(
             import.meta.env.VITE_API_URL + `/start-event/${eventId}`,
             {},
@@ -57,15 +65,24 @@ const RegisteredEventList = () => {
             setLoading(false);
             toast.error(data.message);
           }
+        } catch (err) {
+          setLoading(false);
+          toast.error("Something went wrong starting the event");
         }
       }
-
-      if (eventstatus === "ended") {
+    } else {
+      // audience joining an already started event
+      if (eventstatus === "started") {
         setLoading(false);
-        toast.error("Event has already ended");
+        navigate(`/room/${eventId}`);
+        return;
+      } else {
+        setLoading(false);
+        toast.error("Event has not started yet");
         return;
       }
     }
+
     setLoading(false);
   };
 
