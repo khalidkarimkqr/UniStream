@@ -11,30 +11,25 @@ const SearchBar = () => {
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      if (searchTerm.trim() === "") {
-        // If input is cleared, refetch all events
-        axios
-          .get(`${import.meta.env.VITE_API_URL}/get-registered-events`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          })
-          .then((res) => setEvents(res.data.data))
-          .catch((err) => console.log(err));
-      } else {
-        // If input has value, search
-        axios
-          .get(
-            `${import.meta.env.VITE_API_URL}/search-event?search=${searchTerm}`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          )
-          .then((res) => setEvents(res.data.data))
-          .catch((err) => console.log(err));
-      }
+      const fetchEvents = async () => {
+        try {
+          let res;
+          if (searchTerm.trim()) {
+            res = await axios.get(
+              `${
+                import.meta.env.VITE_API_URL
+              }/search-event?search=${searchTerm}`
+            );
+          } else {
+            res = await axios.get(`${import.meta.env.VITE_API_URL}/get-events`);
+          }
+          setEvents(res.data.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      fetchEvents();
     }, 300);
 
     return () => clearTimeout(debounceTimer);
