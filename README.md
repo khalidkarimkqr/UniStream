@@ -49,17 +49,19 @@
 
 ## 🔄 How It Flows
 
-1. **Signup/Login**: Users or admins log in using their credentials.
-2. **Role Detection**: The app dynamically adjusts UI and functionality based on role (`admin` or `user`).
-3. **Admins** can:
-   - Create new events (title, description, date & time).
-   - Start the event (status switches to “started”).
-   - End the event (status updates to “ended”).
-4. **Users** can:
-   - View upcoming/ongoing events.
-   - Join a live stream once the host starts it.
-5. **ZegoCloud handles**: live video streaming, host-audience differentiation, and room lifecycle.
-6. **After leaving**: Viewers return to dashboard. Hosts automatically trigger event end.
+1. **Auth system** uses JWT tokens and bcrypt-hashed passwords to keep logins secure. All user data is validated and stored in MongoDB.
+
+2. **Role-based access** is built-in. Admins can create, start, or end events. Users can register and join live events once they’ve started.
+
+3. **Events are stored** in MongoDB with real-time status updates (`not started`, `started`, `ended`). API requests are secured using middleware that checks JWT tokens and roles.
+
+4. **Live video streaming** is powered by ZegoCloud. Admins act as hosts, and users as the audience. Zego handles the whole room session lifecycle using its prebuilt SDK.
+
+5. **Smart UI rendering**: The frontend (built with React) detects roles and displays features accordingly. Context is used to keep state consistent across pages.
+
+6. **Clean exits**: If a host leaves, the event automatically ends via a backend trigger, updating its status so no one can rejoin.
+
+7. **CORS and headers** are properly set up for cross-origin communication between Vercel (frontend) and Render (backend).
 
 ---
 

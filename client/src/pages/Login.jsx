@@ -1,14 +1,16 @@
-import { React, useContext } from "react";
+import { React, useContext, useState } from "react";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const { setUser, setIsAuthenticated } = useContext(AppContext);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,9 +33,9 @@ const Login = () => {
       if (data.success) {
         toast.success(data.message);
         e.target.reset();
-        localStorage.setItem("user", JSON.stringify(data.data.user)); // fixed
+        localStorage.setItem("user", JSON.stringify(data.data.user));
         localStorage.setItem("token", data.data.token);
-        setUser(data.data.user); // also fixed
+        setUser(data.data.user);
         setIsAuthenticated(true);
         navigate("/dashboard");
       } else {
@@ -51,7 +53,19 @@ const Login = () => {
         className="sm:w-[50vw] mx-auto px-5 h-[80vh] flex flex-col justify-center gap-4"
       >
         <Input id="email" type="email" placeholder="Email Here" />
-        <Input id="password" type="password" placeholder="Password Here" />
+        <div className="relative">
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password Here"
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-3 cursor-pointer text-xl"
+          >
+            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          </span>
+        </div>
         <Button text="Login" />
       </form>
     </div>

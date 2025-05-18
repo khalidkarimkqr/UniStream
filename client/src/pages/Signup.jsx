@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,8 +53,18 @@ const Signup = () => {
           <Input id="lastName" type="text" placeholder="Last Name Here" />
         </div>
         <Input id="email" type="email" placeholder="Email Here" />
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Input id="password" type="password" placeholder="Password Here" />
+        <div className="flex flex-col sm:flex-row gap-4 items-center relative">
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password Here"
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-[30%] cursor-pointer text-xl"
+          >
+            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          </span>
           <Button text="Create Account" />
         </div>
       </form>
