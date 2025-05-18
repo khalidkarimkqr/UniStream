@@ -12,11 +12,21 @@ const SearchBar = () => {
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       if (searchTerm) {
-        console.log("Searching for:", searchTerm);
+        // fetch filtered events
         axios
           .get(
             `${import.meta.env.VITE_API_URL}/search-event?search=${searchTerm}`
           )
+          .then((res) => setEvents(res.data.data))
+          .catch((err) => console.log(err));
+      } else {
+        // if input is cleared, fetch all events again
+        axios
+          .get(`${import.meta.env.VITE_API_URL}/get-registered-events`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
           .then((res) => setEvents(res.data.data))
           .catch((err) => console.log(err));
       }
