@@ -37,7 +37,7 @@ const Login = () => {
         localStorage.setItem("token", data.data.token);
         setUser(data.data.user);
         setIsAuthenticated(true);
-        navigate("/dashboard");
+        navigate("/");
       } else {
         toast.error(data.message);
       }
