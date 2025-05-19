@@ -2,7 +2,7 @@
 
 # 🎥 UniStream — Campus Goes Live 🎥
 
-## Live campus event platform built with real-time streaming tech and the MERN stack.
+## Live campus events made simple with real-time streaming using MERN
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://your-deployed-demo.vercel.app)
 
@@ -16,56 +16,96 @@
 
 </div>
 
+---
+
+<details>
+<summary>📜 Table of Contents</summary>
+
+- [📖 About](#-about)
+- [🚀 Live Demo](#-live-demo)
+- [🎥 Demo Walkthroughs](#-demo-walkthroughs)
+- [✨ Features](#-features)
+- [🧩 Tech Stack](#-tech-stack)
+- [📂 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+- [🗃️ Database Schemas](#-database-schemas)
+
+</details>
+
+---
+
+## 📖 About
+
+UniStream is a **full-stack live event platform** that simplifies campus broadcasting. **Admins** can launch HD streams in minutes, while **students** join instantly with one click - no plugins or downloads needed.
+
+Everything stays in sync with smart status updates, from **secure signups** to real-time streaming, all wrapped in an academic-friendly design.
+
+---
+
+## 🚀 Live Demo
+
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://uni-stream.vercel.app)
+
+> **Note:** The backend service is hosted on Render.com and may take up to 1 minute to wake up on first access.
+
+> This project uses a REST API backend hosted on Render. Frontend users will experience this automatically.
+
+### Demo Accounts
+
+To experience all features of UniStream, you can use these test accounts:
+
+| Role  | Email                 | Password     |
+| ----- | --------------------- | ------------ |
+| Admin | admin@unistream.edu   | DemoAdmin123 |
+| User  | student@unistream.edu | DemoUser123  |
+
+Or sign up with your own email to test the user experience!
+
+<details>
+<summary>⚠️ Security Disclaimer</summary>
+  
+This demo uses mock data with restricted permissions. For open-source self-hosting, please clone the repository and configure your own credentials.
+</details>
+
+---
+
+## 🎥 Demo Walkthroughs
+
+### **Video 1 - Signup & Login:**
+
 https://github.com/user-attachments/assets/7b38402a-33f7-412a-8b79-1f504634a58e
 
-https://github.com/user-attachments/assets/24e6edd9-973c-42a5-ba9a-fd9c4da0b5d5
+- Try to register for event → blocked until login
+- Sign up → auto-redirects to login
+- Wrong password? Shows error
+- After login: see events, register, UI updates
 
-<br/>
+### **Video 2 - Event Discovery:**
 
-<div align="center">
-  <img src="public/screens/create_event.png" width="49%" />
-  <img src="public/screens/event_list.png" width="49%" /> 
-</div>
+https://github.com/user-attachments/assets/c5f5ce66-4f0f-4844-b0ea-e508171e5837
 
-<div align="center">
-  <img src="public/screens/live_stream_room.gif" width="80%" alt="UniStream demo" />
-</div>
+- Smart search with debouncing
+- Homepage vs Dashboard views
+- Context-aware buttons
+- Detailed event analytics
 
----
+### **Video 3 - Full Experience:**
 
-## About
+https://github.com/user-attachments/assets/fcc29dac-6099-4a86-821b-aee6d94b7eb1
 
-**UniStream** is a live-streaming MERN app designed to simplify event hosting for universities and organizations. Admins can create, start, and end events in real time. Students can join streams instantly.It’s seamless live events and scheduling — all in your browser.
-
----
-
-## Features
-
-- 🎥 Real-time live streaming via ZegoCloud
-- 🧑‍💻 Role-based UI for **admins** and **users**
-- 🗓️ Smart event scheduling and status labels (Not Started, Started, Ended)
-- ✅ User authentication & authorization
-- 📋 Event registration & dynamic event list
-- 📦 RESTful API with token-protected routes
-- 📱 Fully responsive, clean UI
+🚀 **All features working in harmony - the complete UniStream experience!**
 
 ---
 
-## 🔄 How It Flows
+## ✨ Features
 
-1. **Auth system** uses JWT tokens and bcrypt-hashed passwords to keep logins secure. All user data is validated and stored in MongoDB.
-
-2. **Role-based access** is built-in. Admins can create, start, or end events. Users can register and join live events once they’ve started.
-
-3. **Events are stored** in MongoDB with real-time status updates (`not started`, `started`, `ended`). API requests are secured using middleware that checks JWT tokens and roles.
-
-4. **Live video streaming** is powered by ZegoCloud. Admins act as hosts, and users as the audience. Zego handles the whole room session lifecycle using its prebuilt SDK.
-
-5. **Smart UI rendering**: The frontend (built with React) detects roles and displays features accordingly. Context is used to keep state consistent across pages.
-
-6. **Clean exits**: If a host leaves, the event automatically ends via a backend trigger, updating its status so no one can rejoin.
-
-7. **CORS and headers** are properly set up for cross-origin communication between Vercel (frontend) and Render (backend).
+- Real-time live streaming via ZegoCloud
+- Role-based UI for **admins** and **users**
+- Smart event scheduling and status labels (Not Started, Started, Ended)
+- User authentication & authorization
+- Event registration & dynamic event list
+- RESTful API with token-protected routes
+- Fully responsive, clean UI
 
 ---
 
@@ -83,19 +123,78 @@ https://github.com/user-attachments/assets/24e6edd9-973c-42a5-ba9a-fd9c4da0b5d5
 
 ---
 
-## 🚀 Getting Started
+## 📂 Project Structure
 
-### 🛠 Prerequisites
+```bash
+/client
+├── node_modules/
+├── public/screens
+│   └── vite.svg
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── ui/
+│   │   │   ├── Button.jsx
+│   │   │   └── Input.jsx
+│   │   ├── RegisteredEventListenerList.jsx
+│   │   ├── Event.jsx
+│   │   ├── Navbar.jsx
+│   │   └── SearchBar.jsx
+│   ├── contexts/
+│   │   └── AppContext.jsx
+│   ├── layouts/
+│   │   └── Layout.jsx
+│   ├── pages/
+│   │   ├── Dashboard.jsx
+│   │   ├── Error.jsx
+│   │   ├── Event.jsx
+│   │   ├── Home.jsx
+│   │   ├── Login.jsx
+│   │   ├── Room.jsx
+│   │   └── Signup.jsx
+│   ├── routes/
+│   │   ├── NavigationRoutes.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   └── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .env
+├── index.html
+└── vercel.json
 
-- Node.js v16+
-- MongoDB running locally or via Atlas
-- ZegoCloud app ID + server secret
+/server
+├── controllers/
+│   ├── authController.js
+│   ├── eventController.js
+│   └── lib/
+│       ├── connection.js
+│       └── roles.js
+├── middlewares/
+│   └── verifyToken.js
+├── models/
+│   ├── Event.js
+│   └── User.js
+├── routes/
+│   ├── authRoutes.js
+│   └── eventRoutes.js
+├── .env
+├── index.js
+```
 
 ---
 
-### 🔧 Installation
+## 🗃️ Database Schemas
 
-```bash
-git clone https://github.com/your-username/UniStream.git
-cd UniStream
-```
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0;">
+
+  <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img src="client/public/screens/user-schema.png" alt="User database schema" style="width:80%; border: 1px solid #eee;"/>
+    <p style="text-align: center; margin-top: 8px; font-size: 0.9em;">User schema with auth fields and event references</p>
+  </div>
+
+  <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img src="client/public/screens/event-schema.png" alt="Event database schema" style="width:80%; border: 1px solid #eee;"/>
+    <p style="text-align: center; margin-top: 8px; font-size: 0.9em;">Event schema with timestamps and participant tracking</p>
+  </div>
+
+</div>
