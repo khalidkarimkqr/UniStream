@@ -8,7 +8,6 @@ import { toast } from "react-hot-toast";
 
 const Home = () => {
   const { events, setEvents } = useContext(AppContext);
-
   const registerEvent = async (eventId) => {
     try {
       const res = await axios.put(

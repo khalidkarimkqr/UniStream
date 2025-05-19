@@ -3,22 +3,29 @@ import { Link, useLocation } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { FiUsers } from "react-icons/fi";
 import { AppContext } from "../contexts/AppContext";
+import toast from "react-hot-toast";
 
 const Event = ({
   _id,
   title = "Event Title",
-  description = "dfjaodj02 23790263 bdfnydfaynd dfadf 2e 2er ",
+  description = "",
   date = "2023-10-01",
   time = "12:00",
-  registeredUsers = 0,
+  registeredUsers = [],
   status = "upcoming",
   onClick,
 }) => {
   const { pathname } = useLocation();
   const { user } = useContext(AppContext);
 
+  // Check if current user is registered for this event
+  const isRegistered = registeredUsers?.some((regUser) =>
+    typeof regUser === "object"
+      ? regUser._id === user?._id
+      : regUser === user?._id
+  );
+
   const checkEventStatus = () => {
-    console.log(pathname);
     if (pathname === "/dashboard") {
       if (user?.role === "admin") {
         return status === "not started" ? "Start Now" : status;
@@ -27,8 +34,28 @@ const Event = ({
         return status === "not started" ? "Upcoming" : status;
       }
     } else {
-      return status === "not started" ? "Register" : status;
+      // For homepage
+      if (status === "ended") return "Event Ended";
+      return isRegistered ? "Registered" : "Register";
     }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    if (pathname !== "/dashboard") {
+      if (status === "ended") {
+        toast.error("Event has already ended");
+        return;
+      }
+
+      if (isRegistered) {
+        toast.error("User already registered for the event");
+        return;
+      }
+    }
+
+    onClick();
   };
 
   return (
@@ -52,10 +79,10 @@ const Event = ({
           </h3>
           <div className="text-xs sm:text-sm text-slate-500 flex gap-2">
             <FiUsers className="text-sm sm:text-lg" />
-            <span>{registeredUsers?.length} Registered Users</span>
+            <span>{registeredUsers?.length || 0} Registered Users</span>
           </div>
         </div>
-        <Button text={checkEventStatus()} onClick={onClick} />
+        <Button text={checkEventStatus()} onClick={handleClick} />
       </div>
     </div>
   );
