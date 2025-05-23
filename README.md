@@ -21,20 +21,20 @@
 <details>
 <summary>📜 Table of Contents</summary>
 
-- [📖 About](#-about)
-- [🚀 Live Demo](#-live-demo)
-- [🎥 Demo Walkthroughs](#-demo-walkthroughs)
-- [✨ Features](#-features)
-- [🧩 Tech Stack](#-tech-stack)
-- [📂 Project Structure](#-project-structure)
-- [🚀 Getting Started](#-getting-started)
-- [🗃️ Database Schemas](#-database-schemas)
+- [About](#-about)
+- [Live Demo](#-live-demo)
+- [Demo Walkthroughs](#-demo-walkthroughs)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Database Schemas](#-database-schemas)
 
 </details>
 
 ---
 
-## 📖 About
+## About
 
 UniStream is a **full-stack live event platform** that simplifies campus broadcasting. **Admins** can launch HD streams in minutes, while **students** join instantly with one click - no plugins or downloads needed.
 
@@ -42,7 +42,7 @@ Everything stays in sync with smart status updates, from **secure signups** to r
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://uni-stream.vercel.app)
 
@@ -69,7 +69,7 @@ This demo uses mock data with restricted permissions. For open-source self-hosti
 
 ---
 
-## 🎥 Demo Walkthroughs
+## Demo Walkthroughs
 
 ### **Video 1 - Signup & Login:**
 
@@ -97,7 +97,7 @@ https://github.com/user-attachments/assets/fcc29dac-6099-4a86-821b-aee6d94b7eb1
 
 ---
 
-## ✨ Features
+## Features
 
 - Real-time live streaming via ZegoCloud
 - Role-based UI for **admins** and **users**
@@ -109,7 +109,7 @@ https://github.com/user-attachments/assets/fcc29dac-6099-4a86-821b-aee6d94b7eb1
 
 ---
 
-## 🧩 Tech Stack
+## Tech Stack
 
 | Layer            | Tech                      |
 | ---------------- | ------------------------- |
@@ -123,7 +123,7 @@ https://github.com/user-attachments/assets/fcc29dac-6099-4a86-821b-aee6d94b7eb1
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 /client
@@ -183,7 +183,7 @@ https://github.com/user-attachments/assets/fcc29dac-6099-4a86-821b-aee6d94b7eb1
 
 ---
 
-## 🗃️ Database Schemas
+## Database Schemas
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0;">
 
